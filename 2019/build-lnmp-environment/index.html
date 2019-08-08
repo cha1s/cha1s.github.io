@@ -171,7 +171,7 @@ wget https://sourceforge.net/projects/pcre/files/pcre/8.43/pcre-8.43.tar.gz
 #下载最新PCRE
 </code></pre>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564065435672.png" alt="1564065435672" class="lazyload"><figcaption class="image-caption">1564065435672</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564065435672.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <pre><code class="language-bash">tar -zxvf pcre-8.43.tar.gz #解压
 cd pcre-8.36
@@ -215,23 +215,23 @@ make &amp;&amp; make install
 
 <p>安装成功后/usr/local/nginx/sbin/nginx命令报错</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564068688167.png" alt="1564068688167" class="lazyload"><figcaption class="image-caption">1564068688167</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564068688167.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>ldd /usr/local/nginx/sbin/nginx查看一下依赖</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564069821657.png" alt="1564069821657" class="lazyload"><figcaption class="image-caption">1564069821657</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564069821657.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>网上查找后我觉得之前将openssl装在了/usr/local里，所以应该建立软连接</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564070843981.png" alt="1564070843981" class="lazyload"><figcaption class="image-caption">1564070843981</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564070843981.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>再看一下依赖</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564070935260.png" alt="1564070935260" class="lazyload"><figcaption class="image-caption">1564070935260</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564070935260.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>之后再/usr/local/nginx/sbin/nginx启动成功！</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564071047339.png" alt="1564071047339" class="lazyload"><figcaption class="image-caption">1564071047339</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564071047339.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <h3 id="安装php并配置nginx">安装PHP并配置nginx</h3>
 
@@ -242,7 +242,7 @@ cd php-7.3.7
 ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mcrypt=/usr/include --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gd --with-iconv --with-zlib --enable-xml --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --enable-mbregex --enable-fpm --enable-mbstring --enable-ftp --with-openssl --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --without-pear --with-gettext --enable-session --with-curl --with-jpeg-dir --with-freetype-dir --enable-opcache #配置环境
 </code></pre>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564118391756.png" alt="1564118391756" class="lazyload"><figcaption class="image-caption">1564118391756</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564118391756.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>提示libxml2未找到，选择直接yum安装它</p>
 
@@ -256,7 +256,7 @@ cd php-7.3.7
 
 <p>安装成功</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564119053349.png" alt="1564119053349" class="lazyload"><figcaption class="image-caption">1564119053349</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564119053349.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>然而又提示configure: error: Cannot find OpenSSL&rsquo;s libraries</p>
 
@@ -265,7 +265,7 @@ cd php-7.3.7
 <pre><code class="language-bash">find / -name libssl.so #搜索openssl库文件位置
 </code></pre>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564119891498.png" alt="1564119891498" class="lazyload"><figcaption class="image-caption">1564119891498</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564119891498.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <pre><code class="language-bash">ln -s /usr/local/lib64/libssl.so /usr.lib #建立软连接
 </code></pre>
@@ -320,13 +320,13 @@ make&amp;&amp;make install
 
 <p>安装成功~</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564126538188.png" alt="1564126538188" class="lazyload"><figcaption class="image-caption">1564126538188</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564126538188.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>添加环境变量，将nginx和php加入/etc/profile中</p>
 
 <p>更改配置文件名称，启动php-fpm</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564127487444.png" alt="1564127487444" class="lazyload"><figcaption class="image-caption">1564127487444</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564127487444.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>配置nginx解析php</p>
 
@@ -335,7 +335,7 @@ make&amp;&amp;make install
 
 <p>设置用户和组，与php-fpm一致，添加默认文件index.php,更改php设置块。</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564129056586.png" alt="1564129056586" class="lazyload"><figcaption class="image-caption">1564129056586</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564129056586.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>重启测试一下</p>
 
@@ -343,7 +343,7 @@ make&amp;&amp;make install
 nginx
 </code></pre>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564130078963.png" alt="1564130078963" class="lazyload"><figcaption class="image-caption">1564130078963</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564130078963.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>测试成功！最后将配置文件移动到指定目录中。</p>
 
@@ -380,7 +380,7 @@ chown -R mysql:mysql /var/run/mariadb/
 
 <p>修改配置文件</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564218805851.png" alt="1564218805851" class="lazyload"><figcaption class="image-caption">1564218805851</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564218805851.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>初始化数据库，并安装秘钥</p>
 
@@ -388,31 +388,31 @@ chown -R mysql:mysql /var/run/mariadb/
 mysql_ssl_rsa_setup
 </code></pre>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564219174456.png" alt="1564219174456" class="lazyload"><figcaption class="image-caption">1564219174456</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564219174456.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>将usr/local/mysql/bin文件夹加入环境变量</p>
 
 <pre><code class="language-bash">mysqld_safe --user=mysql &amp; #安全启动
 </code></pre>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564220757877.png" alt="1564220757877" class="lazyload"><figcaption class="image-caption">1564220757877</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564220757877.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564220884565.png" alt="1564220884565" class="lazyload"><figcaption class="image-caption">1564220884565</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564220884565.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <pre><code class="language-bash">mysql -u root#登录数据库
 </code></pre>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564221465292.png" alt="1564221465292" class="lazyload"><figcaption class="image-caption">1564221465292</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564221465292.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>登录成功！</p>
 
 <p>修改一下php.ini使其支持mysql</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564222850819.png" alt="1564222850819" class="lazyload"><figcaption class="image-caption">1564222850819</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564222850819.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>我们再建一个网页测试一下</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564222786734.png" alt="1564222786734" class="lazyload"><figcaption class="image-caption">1564222786734</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564222786734.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>测试成功，搭建完成！</p>
 
@@ -425,19 +425,19 @@ systemctl enable php-fpm.service
 
 <p>创建nginx.service，实现nginx自启动</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564229176303.png" alt="1564229176303" class="lazyload"><figcaption class="image-caption">1564229176303</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564229176303.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <pre><code class="language-bash">systemctl daemon-reload 
 systemctl enable nginx
 </code></pre>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564225106148.png" alt="1564225106148" class="lazyload"><figcaption class="image-caption">1564225106148</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564225106148.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <pre><code class="language-bash">cp -a /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql
 chkconfig --add mysql
 </code></pre>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564225987894.png" alt="1564225987894" class="lazyload"><figcaption class="image-caption">1564225987894</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564225987894.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>设置完成。</p>
 
@@ -447,67 +447,67 @@ chkconfig --add mysql
 
 <p>php禁止危险函数</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564313935180.png" alt="1564313935180" class="lazyload"><figcaption class="image-caption">1564313935180</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564313935180.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>只允许执行特定目录下脚本</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564314196743.png" alt="1564314196743" class="lazyload"><figcaption class="image-caption">1564314196743</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564314196743.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>这样写的话是不行的，这样/usr/local/ngnix/html1下的文件也可以被执行</p>
 
 <p>如下</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564315060107.png" alt="1564315060107" class="lazyload"><figcaption class="image-caption">1564315060107</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564315060107.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>避免暴露PHP信息</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564317016920.png" alt="1564317016920" class="lazyload"><figcaption class="image-caption">1564317016920</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564317016920.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>避免暴露错误信息</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564317079208.png" alt="1564317079208" class="lazyload"><figcaption class="image-caption">1564317079208</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564317079208.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>开启http_only</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564317380304.png" alt="1564317380304" class="lazyload"><figcaption class="image-caption">1564317380304</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564317380304.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>指定上传文件的路径</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564317801719.png" alt="1564317801719" class="lazyload"><figcaption class="image-caption">1564317801719</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564317801719.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <h3 id="nginx加固">NGINX加固</h3>
 
 <p>已指定用户和组</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564318260733.png" alt="1564318260733" class="lazyload"><figcaption class="image-caption">1564318260733</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564318260733.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>禁用特殊字符，防止SQL注入</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564321874210.png" alt="1564321874210" class="lazyload"><figcaption class="image-caption">1564321874210</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564321874210.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>封杀特定URL</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564321994220.png" alt="1564321994220" class="lazyload"><figcaption class="image-caption">1564321994220</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564321994220.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>禁止数据文件的PHP执行</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564319195377.png" alt="1564319195377" class="lazyload"><figcaption class="image-caption">1564319195377</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564319195377.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>封杀可疑Agent</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564320041797.png" alt="1564320041797" class="lazyload"><figcaption class="image-caption">1564320041797</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564320041797.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <p>限制方法和行为</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564321671964.png" alt="1564321671964" class="lazyload"><figcaption class="image-caption">1564321671964</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564321671964.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
 <h3 id="mysql加固">MYSQL加固</h3>
 
 <p>已指定用户为不能使用shell的mysql，将数据存储文件存储data中所有者为mysql</p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564320812382.png" alt="1564320812382" class="lazyload"><figcaption class="image-caption">1564320812382</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564320812382.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564321223669.png" alt="1564321223669" class="lazyload"><figcaption class="image-caption">1564321223669</figcaption></figure></p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564321223669.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
     </div>
 

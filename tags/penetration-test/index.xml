@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Penetration-Test on Prometheus&#39;s Blog</title>
+    <link>https://Prometheussssss.github.io/tags/penetration-test/</link>
+    <description>Recent content in Penetration-Test on Prometheus&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 08 Aug 2019 15:59:30 +0800</lastBuildDate>
+    
+	<atom:link href="https://Prometheussssss.github.io/tags/penetration-test/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SQL Language</title>
+      <link>https://Prometheussssss.github.io/2019/sql-language/</link>
+      <pubDate>Thu, 08 Aug 2019 15:59:30 +0800</pubDate>
+      
+      <guid>https://Prometheussssss.github.io/2019/sql-language/</guid>
+      <description> 学习中，敬请期待。 </description>
+    </item>
+    
+    <item>
+      <title>Build Lnmp Environment</title>
+      <link>https://Prometheussssss.github.io/2019/build-lnmp-environment/</link>
+      <pubDate>Thu, 08 Aug 2019 10:16:49 +0800</pubDate>
+      
+      <guid>https://Prometheussssss.github.io/2019/build-lnmp-environment/</guid>
+      <description>环境准备 安装CentOS7 安装nginx  安装CentOS7时选择安装了基本开发环境，所以不必先安装gcc，gcc-c++  ==1. 安装rewrite模块所需PCRE库==
+cd /usr/loacl #将其装入local文件夹中 wget https://sourceforge.net/projects/pcre/files/pcre/8.43/pcre-8.43.tar.gz #下载最新PCRE  tar -zxvf pcre-8.43.tar.gz #解压 cd pcre-8.36 ./configure #配置环境 make &amp;amp;&amp;amp; make install #编译安装  ==2. 安装SSL库==
+和第一步原理类似
+cd .. wget http://www.openssl.org/source/openssl-1.1.1c.tar.gz tar -zxvf openssl-1.0.1j.tar.gz cd openssl-1.0.1j ./configure make &amp;amp;&amp;amp; make install  ==3. 安装zlib库==
+cd /usr/local/ wget http://zlib.net/zlib-1.2.11.tar.gz tar -zxvf zlib-1.2.11.tar.gz cd zlib-1.2.11 ./configure make &amp;amp;&amp;amp; make instal  ==4.安装nginx==
+cd /usr/local/ wget http://nginx.org/download/nginx-1.16.0.tar.gz tar -zxvf nginx-1.</description>
+    </item>
+    
+  </channel>
+</rss>

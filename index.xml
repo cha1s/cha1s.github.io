@@ -5,8 +5,20 @@
     <description>Recent content in Prometheus&#39;s Blog on Prometheus&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Aug 2019 10:16:49 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 08 Aug 2019 15:59:30 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>SQL Language</title>
+      <link>https://Prometheussssss.github.io/2019/sql-language/</link>
+      <pubDate>Thu, 08 Aug 2019 15:59:30 +0800</pubDate>
+      
+      <guid>https://Prometheussssss.github.io/2019/sql-language/</guid>
+      <description>
+
+&lt;h1 id=&#34;学习中-敬请期待&#34;&gt;学习中，敬请期待。&lt;/h1&gt;
+</description>
+    </item>
     
     <item>
       <title>Build Lnmp Environment</title>
@@ -383,17 +395,186 @@ chkconfig --add mysql
       <pubDate>Wed, 07 Aug 2019 23:27:44 +0800</pubDate>
       
       <guid>https://Prometheussssss.github.io/about/</guid>
-      <description>&lt;p&gt;4636&lt;/p&gt;
+      <description>
+
+&lt;h2 id=&#34;毕业于天津理工大学&#34;&gt;毕业于天津理工大学&lt;/h2&gt;
+
+&lt;h2 id=&#34;现正准备tofel-gre-小白成长-想要学习pwn-日后有想打ctf的拉我一个啊&#34;&gt;现正准备TOFEL&amp;amp;GRE,小白成长，想要学习PWN，日后有想打CTF的拉我一个啊。。&lt;/h2&gt;
+
+&lt;h2 id=&#34;希望研究生能继续学习安全-希望我能有研究生上&#34;&gt;希望研究生能继续学习安全, 希望我能有研究生上: )&lt;/h2&gt;
 </description>
     </item>
     
     <item>
       <title>Github Pages&#43;Hugo博客搭建</title>
-      <link>https://Prometheussssss.github.io/2019/build-my-blog/</link>
+      <link>https://Prometheussssss.github.io/2019/build-my-blog-with-hugogithub-pages/</link>
       <pubDate>Wed, 07 Aug 2019 22:49:07 +0800</pubDate>
       
-      <guid>https://Prometheussssss.github.io/2019/build-my-blog/</guid>
-      <description>&lt;p&gt;1234&lt;/p&gt;
+      <guid>https://Prometheussssss.github.io/2019/build-my-blog-with-hugogithub-pages/</guid>
+      <description>
+
+&lt;h1 id=&#34;使用github-hugo搭建blog&#34;&gt;使用Github+Hugo搭建Blog&lt;/h1&gt;
+
+&lt;p&gt;经群里大师傅推荐，我选择使用Github+Hugo搭建我的blog。&lt;/p&gt;
+
+&lt;p&gt;相较于Hexo，基于go语言的Hugo有更快的生成速度。&lt;/p&gt;
+
+&lt;h2 id=&#34;0x00-准备工作&#34;&gt;0x00.准备工作&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;注册Github账号&lt;/li&gt;
+&lt;li&gt;安装Git客户端&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;0x01-搭建githubpages&#34;&gt;0x01.搭建GithubPages&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;新建一个Github repository,名字要用&lt;em&gt;username&lt;/em&gt;.github.io(username是Github用户名)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/build-environment/build-my-blog/1565184384815.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;0x02-安装hugo&#34;&gt;0x02.安装hugo&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;hugo基于go语言，在早期版本我们先要安装go语言，在现有版本中已经不需要安装任何依赖，直接下载即可。&lt;a href=&#34;https://github.com/gohugoio/hugo/releases&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;下载地址&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;下载完成后解压到安装目录，并将目录加入环境变量中。在这里我将hugo解压到E:/Hugo/bin中，安装完成后输入&lt;code&gt;hugo version&lt;/code&gt;进行验证。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/build-environment/build-my-blog/1565187050626.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;进入到将要存放博客文件的目录中使用&lt;code&gt;hugo new site+网站名&lt;/code&gt;创建网站。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd Hugo\Mysites
+hugo new site Prometheussssss.github.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/build-environment/build-my-blog/1565187453287.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;网站结构&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;我们的Mysites目录下将会出现一个名为Prometheussssss.github.io的新文件夹，目录如下,其中archetypes包括内容类型，在创建新内容时自动生成内容的配置。config.toml是网站的配置属性文件。content文件夹里放你网站的内容，例如你发布的博客文章。data目录是Hugo使用的配置文件存放的地方。layout目录存放布局内容，决定内容如何呈现。static目录存放静态资源如图片、css等。themes用于存放网站主题。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;^&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;|-- archetypes
+|-- config.toml
+|-- content
+|-- data
+|-- layouts
+|-- static
+|-- themes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;0x03-换个皮肤&#34;&gt;0x03.换个皮肤&lt;/h2&gt;
+
+&lt;p&gt;主题会放在&lt;code&gt;themes&lt;/code&gt;文件夹下，在这里我选择LeaveIt主题。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd themes
+git clone https://github.com/liuzc/LeaveIt.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;0x04-编辑文章&#34;&gt;0x04.编辑文章&lt;/h2&gt;
+
+&lt;p&gt;在项目界面下可以使用&lt;code&gt;hugo new&lt;/code&gt;命令在content目录下新建相应文件。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;创建一个about界面。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;hugo new about.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;about.md 会被自动生成到 content/about.md ，其内容如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+title: &amp;quot;About&amp;quot;
+date: 2019-08-07T23:27:44+08:00
+draft: true
+---
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;文件的正文内容为&lt;code&gt;Markdown&lt;/code&gt;格式，&lt;code&gt;+++&lt;/code&gt;之间的内容为&lt;a href=&#34;https://github.com/toml-lang/toml&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;TOML&lt;/a&gt;格式，根据喜好，可以换成 &lt;a href=&#34;https://yaml.org&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;YAML&lt;/a&gt; 格式（使用 &lt;code&gt;---&lt;/code&gt; 标记）或者 &lt;a href=&#34;https://www.json.org&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;JSON&lt;/a&gt; 格式。当&lt;code&gt;draft&lt;/code&gt;字段为&lt;code&gt;true&lt;/code&gt;时，文章为草稿，不会被发布，这里将此字段改为&lt;code&gt;false&lt;/code&gt;。具体格式&amp;ndash;&amp;gt;&lt;a href=&#34;https://gohugo.io/content-management/front-matter/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;创建第一篇文章，放到 posts 目录，方便之后管理。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hugo new posts/build-my-blog.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;修改初始内容如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+title: &amp;quot;Github Pages+Hugo博客搭建&amp;quot;
+date: 2019-08-07T22:49:07+08:00
+draft: false
+share: true
+---
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;0x05-本地测试&#34;&gt;0x05.本地测试&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;hugo server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果没在&lt;code&gt;config.toml&lt;/code&gt;中设置主题在这里要加上&lt;code&gt;-t “所选主题”&lt;/code&gt;参数。之后可在&lt;a href=&#34;http://localhost:1313查看&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://localhost:1313查看&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;0x06-部署&#34;&gt;0x06.部署&lt;/h2&gt;
+
+&lt;p&gt;想要将博客部署到我们上面注册的github.io上，首先我们清楚几个概念。&lt;/p&gt;
+
+&lt;p&gt;想要在blog中插入图片我们可以将图片存在github/cdn/图床（七牛、腾讯等）/本地&lt;/p&gt;
+
+&lt;p&gt;我选择将图片存放在本地，注意：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;第一、在config.toml中配置baseurl。作用是无论在本地还是发布出去，图片的路径都是相对于baseurl而言的。
+
+第二、在Markdown图片路径中，以static为根目录写全路径。
+
+示例：假设测试baseurl为`http://localhost:1313/`，图片位置：`/static/img/hugo/123.png`，那么在Markdown中写作`![图片说明](/img/hugo/123.png)`。这时，在浏览器就可以看到图片了。                                                                                        #转载自参考[5]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;要发布时，将baseurl改为&lt;code&gt;https://用户名.github.io/&lt;/code&gt;的实际url。之后在项目目录输入如下命令。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hugo                 #编译生成public文件夹
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;进入public目录中,打开git bash&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git init
+git add .
+git commit -m &amp;quot;Initial commit.&amp;quot;
+git remote add origin https://github.com/Prometheussssss/Prometheussssss.github.io.git
+                                 #url可以在仓库建立成功界面找到https或ssh方式均可
+git push -u origin master        
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后一步可能报错&lt;code&gt;The authenticity of host &#39;github.com (13.229.188.59)&#39; can&#39;t be established.RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.&lt;/code&gt;&lt;a href=&#34;https://blog.csdn.net/qq_34446663/article/details/81106018&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;解决方法&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;很好，接下来就可以访问啦！&lt;/p&gt;
+
+&lt;h2 id=&#34;0x07-参考文献&#34;&gt;0x07.参考文献&lt;/h2&gt;
+
+&lt;p&gt;[1] &lt;a href=&#34;https://brent-li.github.io/post/build-personal-site-with-hugo/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://brent-li.github.io/post/build-personal-site-with-hugo/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[2] &lt;a href=&#34;https://www.gohugo.org/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;hugo中文文档&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[3]&lt;a href=&#34;https://blog.csdn.net/kikajack/article/details/80413052&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://blog.csdn.net/kikajack/article/details/80413052&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[4] &lt;a href=&#34;https://blog.csdn.net/qq_37577660/article/details/78565899&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Git操作&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[5] &lt;a href=&#34;https://blog.csdn.net/qq_30682027/article/details/83536577&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://blog.csdn.net/qq_30682027/article/details/83536577&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;1 &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
 </description>
     </item>
     

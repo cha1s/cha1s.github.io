@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Prometheus&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Aug 2019 10:16:49 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 08 Aug 2019 15:59:30 +0800</lastBuildDate>
     
 	<atom:link href="https://Prometheussssss.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SQL Language</title>
+      <link>https://Prometheussssss.github.io/2019/sql-language/</link>
+      <pubDate>Thu, 08 Aug 2019 15:59:30 +0800</pubDate>
+      
+      <guid>https://Prometheussssss.github.io/2019/sql-language/</guid>
+      <description> 学习中，敬请期待。 </description>
+    </item>
     
     <item>
       <title>Build Lnmp Environment</title>
@@ -27,11 +36,18 @@ cd /usr/local/ wget http://nginx.org/download/nginx-1.16.0.tar.gz tar -zxvf ngin
     
     <item>
       <title>Github Pages&#43;Hugo博客搭建</title>
-      <link>https://Prometheussssss.github.io/2019/build-my-blog/</link>
+      <link>https://Prometheussssss.github.io/2019/build-my-blog-with-hugogithub-pages/</link>
       <pubDate>Wed, 07 Aug 2019 22:49:07 +0800</pubDate>
       
-      <guid>https://Prometheussssss.github.io/2019/build-my-blog/</guid>
-      <description>1234</description>
+      <guid>https://Prometheussssss.github.io/2019/build-my-blog-with-hugogithub-pages/</guid>
+      <description>使用Github+Hugo搭建Blog 经群里大师傅推荐，我选择使用Github+Hugo搭建我的blog。
+相较于Hexo，基于go语言的Hugo有更快的生成速度。
+0x00.准备工作  注册Github账号 安装Git客户端  0x01.搭建GithubPages  新建一个Github repository,名字要用username.github.io(username是Github用户名)  0x02.安装hugo  hugo基于go语言，在早期版本我们先要安装go语言，在现有版本中已经不需要安装任何依赖，直接下载即可。下载地址 下载完成后解压到安装目录，并将目录加入环境变量中。在这里我将hugo解压到E:/Hugo/bin中，安装完成后输入hugo version进行验证。   进入到将要存放博客文件的目录中使用hugo new site+网站名创建网站。
+cd Hugo\Mysites hugo new site Prometheussssss.github.io    网站结构  我们的Mysites目录下将会出现一个名为Prometheussssss.github.io的新文件夹，目录如下,其中archetypes包括内容类型，在创建新内容时自动生成内容的配置。config.toml是网站的配置属性文件。content文件夹里放你网站的内容，例如你发布的博客文章。data目录是Hugo使用的配置文件存放的地方。layout目录存放布局内容，决定内容如何呈现。static目录存放静态资源如图片、css等。themes用于存放网站主题。1^
+|-- archetypes |-- config.toml |-- content |-- data |-- layouts |-- static |-- themes  0x03.换个皮肤 主题会放在themes文件夹下，在这里我选择LeaveIt主题。
+cd themes git clone https://github.com/liuzc/LeaveIt.git  0x04.编辑文章 在项目界面下可以使用hugo new命令在content目录下新建相应文件。
+ 创建一个about界面。
+hugo new about.md   about.md 会被自动生成到 content/about.</description>
     </item>
     
   </channel>

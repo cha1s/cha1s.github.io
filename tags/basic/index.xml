@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Basic on Prometheus&#39;s Blog</title>
+    <link>https://Prometheussssss.github.io/tags/basic/</link>
+    <description>Recent content in Basic on Prometheus&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 08 Aug 2019 15:59:30 +0800</lastBuildDate>
+    
+	<atom:link href="https://Prometheussssss.github.io/tags/basic/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SQL Language</title>
+      <link>https://Prometheussssss.github.io/2019/sql-language/</link>
+      <pubDate>Thu, 08 Aug 2019 15:59:30 +0800</pubDate>
+      
+      <guid>https://Prometheussssss.github.io/2019/sql-language/</guid>
+      <description> 学习中，敬请期待。 </description>
+    </item>
+    
+  </channel>
+</rss>

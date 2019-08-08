@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Prometheus.Zhang">
+  
+  
+  
+  <link rel="prev" href="https://Prometheussssss.github.io/2019/build-my-blog/" />
+  
+  <link rel="canonical" href="https://Prometheussssss.github.io/2019/build-lnmp-environment/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Build Lnmp Environment | Prometheus&#39;s Blog
+       
+  </title>
+  <meta name="title" content="Build Lnmp Environment | Prometheus&#39;s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/Prometheussssss.github.io\/"
+    },
+    "articleSection" : "posts",
+    "name" : "Build Lnmp Environment",
+    "headline" : "Build Lnmp Environment",
+    "description" : "环境准备 安装CentOS7 安装nginx  安装CentOS7时选择安装了基本开发环境，所以不必先安装gcc，gcc-c\x2b\x2b  ==1. 安装rewrite模块所需PCRE库==\ncd \/usr\/loacl #将其装入local文件夹中 wget https:\/\/sourceforge.net\/projects\/pcre\/files\/pcre\/8.43\/pcre-8.43.tar.gz #下载最新PCRE  tar -zxvf pcre-8.43.tar.gz #解压 cd pcre-8.36 .\/configure #配置环境 make \x26amp;\x26amp; make install #编译安装  ==2. 安装SSL库==\n和第一步原理类似\ncd .. wget http:\/\/www.openssl.org\/source\/openssl-1.1.1c.tar.gz tar -zxvf openssl-1.0.1j.tar.gz cd openssl-1.0.1j .\/configure make \x26amp;\x26amp; make install  ==3. 安装zlib库==\ncd \/usr\/local\/ wget http:\/\/zlib.net\/zlib-1.2.11.tar.gz tar -zxvf zlib-1.2.11.tar.gz cd zlib-1.2.11 .\/configure make \x26amp;\x26amp; make instal  ==4.安装nginx==\ncd \/usr\/local\/ wget http:\/\/nginx.org\/download\/nginx-1.16.0.tar.gz tar -zxvf nginx-1.",
+    "inLanguage" : "en-us",
+    "author" : "Prometheus.Zhang",
+    "creator" : "Prometheus.Zhang",
+    "publisher": "Prometheus.Zhang",
+    "accountablePerson" : "Prometheus.Zhang",
+    "copyrightHolder" : "Prometheus.Zhang",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-08-08 10:16:49 \x2b0800 CST",
+    "dateModified" : "2019-08-08 10:16:49 \x2b0800 CST",
+    "url" : "https:\/\/Prometheussssss.github.io\/2019\/build-lnmp-environment\/",
+    "wordCount" : "392",
+    "keywords" : [  "Prometheus\x27s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://Prometheussssss.github.io/">Prometheus&#39;s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://Prometheussssss.github.io/">Prometheus&#39;s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Build Lnmp Environment</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://Prometheussssss.github.io/" rel="author">Prometheus.Zhang</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-08-08 itemprop="datePublished">August 8, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://Prometheussssss.github.io/categories/build-environment/"> Build Environment </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="环境准备">环境准备</h1>
+
+<h3 id="安装centos7">安装CentOS7</h3>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1563947987000.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<h3 id="安装nginx">安装nginx</h3>
+
+<ul>
+<li>安装CentOS7时选择安装了基本开发环境，所以不必先安装gcc，gcc-c++</li>
+</ul>
+
+<hr />
+
+<p>==1. 安装rewrite模块所需PCRE库==</p>
+
+<pre><code class="language-bash">cd /usr/loacl                        #将其装入local文件夹中
+wget https://sourceforge.net/projects/pcre/files/pcre/8.43/pcre-8.43.tar.gz
+#下载最新PCRE
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564065435672.png" alt="1564065435672" class="lazyload"><figcaption class="image-caption">1564065435672</figcaption></figure></p>
+
+<pre><code class="language-bash">tar -zxvf pcre-8.43.tar.gz #解压
+cd pcre-8.36
+./configure          #配置环境
+make &amp;&amp; make install #编译安装
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/build-environment/build-lnmp-environment/1564065879269.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p>==2. 安装SSL库==</p>
+
+<p>和第一步原理类似</p>
+
+<pre><code class="language-bash">cd ..
+wget http://www.openssl.org/source/openssl-1.1.1c.tar.gz
+tar -zxvf openssl-1.0.1j.tar.gz
+cd openssl-1.0.1j
+./configure
+make &amp;&amp; make install
+</code></pre>
+
+<p>==3. 安装zlib库==</p>
+
+<pre><code class="language-bash">cd /usr/local/
+wget http://zlib.net/zlib-1.2.11.tar.gz
+tar -zxvf zlib-1.2.11.tar.gz
+cd zlib-1.2.11
+./configure
+make &amp;&amp; make instal
+</code></pre>
+
+<p>==4.安装nginx==</p>
+
+<pre><code class="language-bash">cd /usr/local/
+wget http://nginx.org/download/nginx-1.16.0.tar.gz
+tar -zxvf nginx-1.16.0.tar.gz
+cd nginx-1.16.0 
+./configure --user=nobody --group=nobody --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_gzip_static_module --with-http_realip_module --with-http_sub_module --with-http_ssl_module
+make &amp;&amp; make install
+</code></pre>
+
+<p>安装成功后/usr/local/nginx/sbin/nginx命令报错</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564068688167.png" alt="1564068688167" class="lazyload"><figcaption class="image-caption">1564068688167</figcaption></figure></p>
+
+<p>ldd /usr/local/nginx/sbin/nginx查看一下依赖</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564069821657.png" alt="1564069821657" class="lazyload"><figcaption class="image-caption">1564069821657</figcaption></figure></p>
+
+<p>网上查找后我觉得之前将openssl装在了/usr/local里，所以应该建立软连接</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564070843981.png" alt="1564070843981" class="lazyload"><figcaption class="image-caption">1564070843981</figcaption></figure></p>
+
+<p>再看一下依赖</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564070935260.png" alt="1564070935260" class="lazyload"><figcaption class="image-caption">1564070935260</figcaption></figure></p>
+
+<p>之后再/usr/local/nginx/sbin/nginx启动成功！</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564071047339.png" alt="1564071047339" class="lazyload"><figcaption class="image-caption">1564071047339</figcaption></figure></p>
+
+<h3 id="安装php并配置nginx">安装PHP并配置nginx</h3>
+
+<pre><code class="language-bash">cd /usr/local/
+wget https://www.php.net/distributions/php-7.3.7.tar.gz
+tar -zxvf php-7.3.7.tar.gz
+cd php-7.3.7
+./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mcrypt=/usr/include --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gd --with-iconv --with-zlib --enable-xml --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --enable-mbregex --enable-fpm --enable-mbstring --enable-ftp --with-openssl --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --without-pear --with-gettext --enable-session --with-curl --with-jpeg-dir --with-freetype-dir --enable-opcache #配置环境
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564118391756.png" alt="1564118391756" class="lazyload"><figcaption class="image-caption">1564118391756</figcaption></figure></p>
+
+<p>提示libxml2未找到，选择直接yum安装它</p>
+
+<pre><code class="language-bash">yum install libxml2
+</code></pre>
+
+<p>显示已安装最新版本，网上查找提示再安装libxml2-devel</p>
+
+<pre><code class="language-bash">yum install libxml2-devel.x68_64
+</code></pre>
+
+<p>安装成功</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564119053349.png" alt="1564119053349" class="lazyload"><figcaption class="image-caption">1564119053349</figcaption></figure></p>
+
+<p>然而又提示configure: error: Cannot find OpenSSL&rsquo;s libraries</p>
+
+<p>网上查得知尽管我们安装了openssl，但是查找库文件还是要去/usr/lib</p>
+
+<pre><code class="language-bash">find / -name libssl.so #搜索openssl库文件位置
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564119891498.png" alt="1564119891498" class="lazyload"><figcaption class="image-caption">1564119891498</figcaption></figure></p>
+
+<pre><code class="language-bash">ln -s /usr/local/lib64/libssl.so /usr.lib #建立软连接
+</code></pre>
+
+<p>继续，又爆出error: cURL version 7.15.5 or later is required to compile php with cURL support</p>
+
+<pre><code class="language-bash">yum install libcurl-devel.x86_64  
+</code></pre>
+
+<p>error: jpeglib.h not found.</p>
+
+<pre><code class="language-bash">yum install libjpeg-turbo-devel.x86_64 
+</code></pre>
+
+<p>error: png.h not found.</p>
+
+<pre><code class="language-bash">yum install libpng-devel.x86_64 
+</code></pre>
+
+<p>error: freetype-config not found.</p>
+
+<pre><code class="language-bash">yum install freetype-devel.x86_64 
+</code></pre>
+
+<p>error: Please reinstall the libzip distribution</p>
+
+<p>将原有卸载选择源码安装</p>
+
+<pre><code class="language-bash">yum remove -y libzip
+wget https://nih.at/libzip/libzip-1.2.0.tar.gz
+tar -zxvf libzip-1.2.0.tar.gz.tar.gz
+cd libzip-1.2.0/
+./configure
+make&amp;&amp;make install
+</code></pre>
+
+<p>随后./configure成功，make&amp;&amp;install</p>
+
+<pre><code class="language-bash">./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mcrypt=/usr/include --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gd --with-iconv --with-zlib --enable-xml --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --enable-mbregex --enable-fpm --enable-mbstring --enable-ftp --with-openssl --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --without-pear --with-gettext --enable-session --with-curl --with-jpeg-dir --with-freetype-dir --enable-opcache
+make&amp;&amp;make install
+</code></pre>
+
+<p>致命错误：zipconf.h：没有那个文件或目录</p>
+
+<pre><code class="language-bash">find / -name zipconf.h
+</code></pre>
+
+<p>发现在/usr/local/libzip-1.2.0/lib里,复制到需要的地方</p>
+
+<pre><code class="language-bash">cp /usr/local/libzip-1.2.0/lib/zipconf.h /usr/local/include/zipconf.h
+</code></pre>
+
+<p>安装成功~</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564126538188.png" alt="1564126538188" class="lazyload"><figcaption class="image-caption">1564126538188</figcaption></figure></p>
+
+<p>添加环境变量，将nginx和php加入/etc/profile中</p>
+
+<p>更改配置文件名称，启动php-fpm</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564127487444.png" alt="1564127487444" class="lazyload"><figcaption class="image-caption">1564127487444</figcaption></figure></p>
+
+<p>配置nginx解析php</p>
+
+<pre><code class="language-bash">vim /usr/local/nginx/conf/nginx.conf
+</code></pre>
+
+<p>设置用户和组，与php-fpm一致，添加默认文件index.php,更改php设置块。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564129056586.png" alt="1564129056586" class="lazyload"><figcaption class="image-caption">1564129056586</figcaption></figure></p>
+
+<p>重启测试一下</p>
+
+<pre><code class="language-bash">killall nginx
+nginx
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564130078963.png" alt="1564130078963" class="lazyload"><figcaption class="image-caption">1564130078963</figcaption></figure></p>
+
+<p>测试成功！最后将配置文件移动到指定目录中。</p>
+
+<pre><code class="language-bash"> cp /usr/local/php-7.3.7/php.ini-development /usr/local/php/etc/php.ini 
+ #将配置文件移动到指定目录中
+</code></pre>
+
+<h3 id="安装配置mysql">安装配置mysql</h3>
+
+<p>wget下载过慢，所以用迅雷在官网上下载后再移到虚拟机中</p>
+
+<p>先创建用户和组</p>
+
+<pre><code class="language-bash">groupadd mysql
+useradd -s /sbin/nologin -g mysql mysql
+</code></pre>
+
+<p>创建需要的文件夹并赋予权限</p>
+
+<pre><code class="language-bash">mkdir -p /usr/local/mysql/data
+chown -R mysql:mysql /usr/local/mysql/
+touch /var/log/mysql.log
+chown -R mysql:mysql /var/log/mysql.log
+mkdir -p /var/lib/mysql
+chown -R mysql:mysql /var/lib/mysql/
+mkdir -p /var/run/mysqld
+chown -R mysql:mysql /var/run/mysqld/
+mkdir /var/log/mariadb
+touch /var/log/mariadb/mariadb.log
+chown -R mysql:mysql /var/log/mariadb/ 
+mkdir -p /var/run/mariadb
+chown -R mysql:mysql /var/run/mariadb/
+</code></pre>
+
+<p>修改配置文件</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564218805851.png" alt="1564218805851" class="lazyload"><figcaption class="image-caption">1564218805851</figcaption></figure></p>
+
+<p>初始化数据库，并安装秘钥</p>
+
+<pre><code class="language-bash">mysqld --defaults-file=/etc/my.cnf --initialize-insecure --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --user=mysql
+mysql_ssl_rsa_setup
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564219174456.png" alt="1564219174456" class="lazyload"><figcaption class="image-caption">1564219174456</figcaption></figure></p>
+
+<p>将usr/local/mysql/bin文件夹加入环境变量</p>
+
+<pre><code class="language-bash">mysqld_safe --user=mysql &amp; #安全启动
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564220757877.png" alt="1564220757877" class="lazyload"><figcaption class="image-caption">1564220757877</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564220884565.png" alt="1564220884565" class="lazyload"><figcaption class="image-caption">1564220884565</figcaption></figure></p>
+
+<pre><code class="language-bash">mysql -u root#登录数据库
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564221465292.png" alt="1564221465292" class="lazyload"><figcaption class="image-caption">1564221465292</figcaption></figure></p>
+
+<p>登录成功！</p>
+
+<p>修改一下php.ini使其支持mysql</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564222850819.png" alt="1564222850819" class="lazyload"><figcaption class="image-caption">1564222850819</figcaption></figure></p>
+
+<p>我们再建一个网页测试一下</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564222786734.png" alt="1564222786734" class="lazyload"><figcaption class="image-caption">1564222786734</figcaption></figure></p>
+
+<p>测试成功，搭建完成！</p>
+
+<p>将它们设置为开机自启动</p>
+
+<pre><code class="language-bash">cp /usr/local/php-7.3.7/sapi/fpm/php-fpm.service /usr/lib/systemd/system/
+systemctl daemon-reload 
+systemctl enable php-fpm.service
+</code></pre>
+
+<p>创建nginx.service，实现nginx自启动</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564229176303.png" alt="1564229176303" class="lazyload"><figcaption class="image-caption">1564229176303</figcaption></figure></p>
+
+<pre><code class="language-bash">systemctl daemon-reload 
+systemctl enable nginx
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564225106148.png" alt="1564225106148" class="lazyload"><figcaption class="image-caption">1564225106148</figcaption></figure></p>
+
+<pre><code class="language-bash">cp -a /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql
+chkconfig --add mysql
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564225987894.png" alt="1564225987894" class="lazyload"><figcaption class="image-caption">1564225987894</figcaption></figure></p>
+
+<p>设置完成。</p>
+
+<h1 id="安全加固">安全加固</h1>
+
+<h3 id="php加固">PHP加固</h3>
+
+<p>php禁止危险函数</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564313935180.png" alt="1564313935180" class="lazyload"><figcaption class="image-caption">1564313935180</figcaption></figure></p>
+
+<p>只允许执行特定目录下脚本</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564314196743.png" alt="1564314196743" class="lazyload"><figcaption class="image-caption">1564314196743</figcaption></figure></p>
+
+<p>这样写的话是不行的，这样/usr/local/ngnix/html1下的文件也可以被执行</p>
+
+<p>如下</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564315060107.png" alt="1564315060107" class="lazyload"><figcaption class="image-caption">1564315060107</figcaption></figure></p>
+
+<p>避免暴露PHP信息</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564317016920.png" alt="1564317016920" class="lazyload"><figcaption class="image-caption">1564317016920</figcaption></figure></p>
+
+<p>避免暴露错误信息</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564317079208.png" alt="1564317079208" class="lazyload"><figcaption class="image-caption">1564317079208</figcaption></figure></p>
+
+<p>开启http_only</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564317380304.png" alt="1564317380304" class="lazyload"><figcaption class="image-caption">1564317380304</figcaption></figure></p>
+
+<p>指定上传文件的路径</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564317801719.png" alt="1564317801719" class="lazyload"><figcaption class="image-caption">1564317801719</figcaption></figure></p>
+
+<h3 id="nginx加固">NGINX加固</h3>
+
+<p>已指定用户和组</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564318260733.png" alt="1564318260733" class="lazyload"><figcaption class="image-caption">1564318260733</figcaption></figure></p>
+
+<p>禁用特殊字符，防止SQL注入</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564321874210.png" alt="1564321874210" class="lazyload"><figcaption class="image-caption">1564321874210</figcaption></figure></p>
+
+<p>封杀特定URL</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564321994220.png" alt="1564321994220" class="lazyload"><figcaption class="image-caption">1564321994220</figcaption></figure></p>
+
+<p>禁止数据文件的PHP执行</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564319195377.png" alt="1564319195377" class="lazyload"><figcaption class="image-caption">1564319195377</figcaption></figure></p>
+
+<p>封杀可疑Agent</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564320041797.png" alt="1564320041797" class="lazyload"><figcaption class="image-caption">1564320041797</figcaption></figure></p>
+
+<p>限制方法和行为</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564321671964.png" alt="1564321671964" class="lazyload"><figcaption class="image-caption">1564321671964</figcaption></figure></p>
+
+<h3 id="mysql加固">MYSQL加固</h3>
+
+<p>已指定用户为不能使用shell的mysql，将数据存储文件存储data中所有者为mysql</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564320812382.png" alt="1564320812382" class="lazyload"><figcaption class="image-caption">1564320812382</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564321223669.png" alt="1564321223669" class="lazyload"><figcaption class="image-caption">1564321223669</figcaption></figure></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Prometheus.Zhang </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://Prometheussssss.github.io/2019/build-lnmp-environment/>https://Prometheussssss.github.io/2019/build-lnmp-environment/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://Prometheussssss.github.io/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://Prometheussssss.github.io/2019/build-my-blog/" class="prev" rel="prev" title="Github Pages&#43;Hugo博客搭建"><i class="iconfont icon-left"></i>&nbsp;Github Pages&#43;Hugo博客搭建</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2019</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://Prometheussssss.github.io/">Prometheus.Zhang</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

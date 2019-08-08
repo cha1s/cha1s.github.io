@@ -1,0 +1,401 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Prometheus&#39;s Blog on Prometheus&#39;s Blog</title>
+    <link>https://Prometheussssss.github.io/</link>
+    <description>Recent content in Prometheus&#39;s Blog on Prometheus&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 08 Aug 2019 10:16:49 +0800</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Build Lnmp Environment</title>
+      <link>https://Prometheussssss.github.io/2019/build-lnmp-environment/</link>
+      <pubDate>Thu, 08 Aug 2019 10:16:49 +0800</pubDate>
+      
+      <guid>https://Prometheussssss.github.io/2019/build-lnmp-environment/</guid>
+      <description>
+
+&lt;h1 id=&#34;环境准备&#34;&gt;环境准备&lt;/h1&gt;
+
+&lt;h3 id=&#34;安装centos7&#34;&gt;安装CentOS7&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/build-environment/build-lnmp-environment/1563947987000.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;安装nginx&#34;&gt;安装nginx&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;安装CentOS7时选择安装了基本开发环境，所以不必先安装gcc，gcc-c++&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;==1. 安装rewrite模块所需PCRE库==&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd /usr/loacl                        #将其装入local文件夹中
+wget https://sourceforge.net/projects/pcre/files/pcre/8.43/pcre-8.43.tar.gz
+#下载最新PCRE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564065435672.png&#34; alt=&#34;1564065435672&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;tar -zxvf pcre-8.43.tar.gz #解压
+cd pcre-8.36
+./configure          #配置环境
+make &amp;amp;&amp;amp; make install #编译安装
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/build-environment/build-lnmp-environment/1564065879269.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;==2. 安装SSL库==&lt;/p&gt;
+
+&lt;p&gt;和第一步原理类似&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd ..
+wget http://www.openssl.org/source/openssl-1.1.1c.tar.gz
+tar -zxvf openssl-1.0.1j.tar.gz
+cd openssl-1.0.1j
+./configure
+make &amp;amp;&amp;amp; make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;==3. 安装zlib库==&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd /usr/local/
+wget http://zlib.net/zlib-1.2.11.tar.gz
+tar -zxvf zlib-1.2.11.tar.gz
+cd zlib-1.2.11
+./configure
+make &amp;amp;&amp;amp; make instal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;==4.安装nginx==&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd /usr/local/
+wget http://nginx.org/download/nginx-1.16.0.tar.gz
+tar -zxvf nginx-1.16.0.tar.gz
+cd nginx-1.16.0 
+./configure --user=nobody --group=nobody --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_gzip_static_module --with-http_realip_module --with-http_sub_module --with-http_ssl_module
+make &amp;amp;&amp;amp; make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装成功后/usr/local/nginx/sbin/nginx命令报错&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564068688167.png&#34; alt=&#34;1564068688167&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ldd /usr/local/nginx/sbin/nginx查看一下依赖&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564069821657.png&#34; alt=&#34;1564069821657&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;网上查找后我觉得之前将openssl装在了/usr/local里，所以应该建立软连接&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564070843981.png&#34; alt=&#34;1564070843981&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;再看一下依赖&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564070935260.png&#34; alt=&#34;1564070935260&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;之后再/usr/local/nginx/sbin/nginx启动成功！&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564071047339.png&#34; alt=&#34;1564071047339&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;安装php并配置nginx&#34;&gt;安装PHP并配置nginx&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cd /usr/local/
+wget https://www.php.net/distributions/php-7.3.7.tar.gz
+tar -zxvf php-7.3.7.tar.gz
+cd php-7.3.7
+./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mcrypt=/usr/include --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gd --with-iconv --with-zlib --enable-xml --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --enable-mbregex --enable-fpm --enable-mbstring --enable-ftp --with-openssl --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --without-pear --with-gettext --enable-session --with-curl --with-jpeg-dir --with-freetype-dir --enable-opcache #配置环境
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564118391756.png&#34; alt=&#34;1564118391756&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;提示libxml2未找到，选择直接yum安装它&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;yum install libxml2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;显示已安装最新版本，网上查找提示再安装libxml2-devel&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;yum install libxml2-devel.x68_64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装成功&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564119053349.png&#34; alt=&#34;1564119053349&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然而又提示configure: error: Cannot find OpenSSL&amp;rsquo;s libraries&lt;/p&gt;
+
+&lt;p&gt;网上查得知尽管我们安装了openssl，但是查找库文件还是要去/usr/lib&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;find / -name libssl.so #搜索openssl库文件位置
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564119891498.png&#34; alt=&#34;1564119891498&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ln -s /usr/local/lib64/libssl.so /usr.lib #建立软连接
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;继续，又爆出error: cURL version 7.15.5 or later is required to compile php with cURL support&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;yum install libcurl-devel.x86_64  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;error: jpeglib.h not found.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;yum install libjpeg-turbo-devel.x86_64 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;error: png.h not found.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;yum install libpng-devel.x86_64 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;error: freetype-config not found.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;yum install freetype-devel.x86_64 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;error: Please reinstall the libzip distribution&lt;/p&gt;
+
+&lt;p&gt;将原有卸载选择源码安装&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;yum remove -y libzip
+wget https://nih.at/libzip/libzip-1.2.0.tar.gz
+tar -zxvf libzip-1.2.0.tar.gz.tar.gz
+cd libzip-1.2.0/
+./configure
+make&amp;amp;&amp;amp;make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;随后./configure成功，make&amp;amp;&amp;amp;install&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --with-mcrypt=/usr/include --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gd --with-iconv --with-zlib --enable-xml --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --enable-mbregex --enable-fpm --enable-mbstring --enable-ftp --with-openssl --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --without-pear --with-gettext --enable-session --with-curl --with-jpeg-dir --with-freetype-dir --enable-opcache
+make&amp;amp;&amp;amp;make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;致命错误：zipconf.h：没有那个文件或目录&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;find / -name zipconf.h
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;发现在/usr/local/libzip-1.2.0/lib里,复制到需要的地方&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cp /usr/local/libzip-1.2.0/lib/zipconf.h /usr/local/include/zipconf.h
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;安装成功~&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564126538188.png&#34; alt=&#34;1564126538188&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;添加环境变量，将nginx和php加入/etc/profile中&lt;/p&gt;
+
+&lt;p&gt;更改配置文件名称，启动php-fpm&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564127487444.png&#34; alt=&#34;1564127487444&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;配置nginx解析php&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;vim /usr/local/nginx/conf/nginx.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;设置用户和组，与php-fpm一致，添加默认文件index.php,更改php设置块。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564129056586.png&#34; alt=&#34;1564129056586&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;重启测试一下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;killall nginx
+nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564130078963.png&#34; alt=&#34;1564130078963&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;测试成功！最后将配置文件移动到指定目录中。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt; cp /usr/local/php-7.3.7/php.ini-development /usr/local/php/etc/php.ini 
+ #将配置文件移动到指定目录中
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;安装配置mysql&#34;&gt;安装配置mysql&lt;/h3&gt;
+
+&lt;p&gt;wget下载过慢，所以用迅雷在官网上下载后再移到虚拟机中&lt;/p&gt;
+
+&lt;p&gt;先创建用户和组&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;groupadd mysql
+useradd -s /sbin/nologin -g mysql mysql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;创建需要的文件夹并赋予权限&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mkdir -p /usr/local/mysql/data
+chown -R mysql:mysql /usr/local/mysql/
+touch /var/log/mysql.log
+chown -R mysql:mysql /var/log/mysql.log
+mkdir -p /var/lib/mysql
+chown -R mysql:mysql /var/lib/mysql/
+mkdir -p /var/run/mysqld
+chown -R mysql:mysql /var/run/mysqld/
+mkdir /var/log/mariadb
+touch /var/log/mariadb/mariadb.log
+chown -R mysql:mysql /var/log/mariadb/ 
+mkdir -p /var/run/mariadb
+chown -R mysql:mysql /var/run/mariadb/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修改配置文件&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564218805851.png&#34; alt=&#34;1564218805851&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;初始化数据库，并安装秘钥&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysqld --defaults-file=/etc/my.cnf --initialize-insecure --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --user=mysql
+mysql_ssl_rsa_setup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564219174456.png&#34; alt=&#34;1564219174456&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;将usr/local/mysql/bin文件夹加入环境变量&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysqld_safe --user=mysql &amp;amp; #安全启动
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564220757877.png&#34; alt=&#34;1564220757877&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564220884565.png&#34; alt=&#34;1564220884565&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;mysql -u root#登录数据库
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564221465292.png&#34; alt=&#34;1564221465292&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;登录成功！&lt;/p&gt;
+
+&lt;p&gt;修改一下php.ini使其支持mysql&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564222850819.png&#34; alt=&#34;1564222850819&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们再建一个网页测试一下&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564222786734.png&#34; alt=&#34;1564222786734&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;测试成功，搭建完成！&lt;/p&gt;
+
+&lt;p&gt;将它们设置为开机自启动&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cp /usr/local/php-7.3.7/sapi/fpm/php-fpm.service /usr/lib/systemd/system/
+systemctl daemon-reload 
+systemctl enable php-fpm.service
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;创建nginx.service，实现nginx自启动&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564229176303.png&#34; alt=&#34;1564229176303&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;systemctl daemon-reload 
+systemctl enable nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564225106148.png&#34; alt=&#34;1564225106148&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;cp -a /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql
+chkconfig --add mysql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564225987894.png&#34; alt=&#34;1564225987894&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;设置完成。&lt;/p&gt;
+
+&lt;h1 id=&#34;安全加固&#34;&gt;安全加固&lt;/h1&gt;
+
+&lt;h3 id=&#34;php加固&#34;&gt;PHP加固&lt;/h3&gt;
+
+&lt;p&gt;php禁止危险函数&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564313935180.png&#34; alt=&#34;1564313935180&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;只允许执行特定目录下脚本&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564314196743.png&#34; alt=&#34;1564314196743&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这样写的话是不行的，这样/usr/local/ngnix/html1下的文件也可以被执行&lt;/p&gt;
+
+&lt;p&gt;如下&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564315060107.png&#34; alt=&#34;1564315060107&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;避免暴露PHP信息&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564317016920.png&#34; alt=&#34;1564317016920&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;避免暴露错误信息&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564317079208.png&#34; alt=&#34;1564317079208&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;开启http_only&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564317380304.png&#34; alt=&#34;1564317380304&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;指定上传文件的路径&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564317801719.png&#34; alt=&#34;1564317801719&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;nginx加固&#34;&gt;NGINX加固&lt;/h3&gt;
+
+&lt;p&gt;已指定用户和组&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564318260733.png&#34; alt=&#34;1564318260733&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;禁用特殊字符，防止SQL注入&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564321874210.png&#34; alt=&#34;1564321874210&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;封杀特定URL&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564321994220.png&#34; alt=&#34;1564321994220&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;禁止数据文件的PHP执行&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564319195377.png&#34; alt=&#34;1564319195377&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;封杀可疑Agent&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564320041797.png&#34; alt=&#34;1564320041797&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;限制方法和行为&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564321671964.png&#34; alt=&#34;1564321671964&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;mysql加固&#34;&gt;MYSQL加固&lt;/h3&gt;
+
+&lt;p&gt;已指定用户为不能使用shell的mysql，将数据存储文件存储data中所有者为mysql&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564320812382.png&#34; alt=&#34;1564320812382&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;C:UsersAdministratorAppDataRoamingTyporatypora-user-images1564321223669.png&#34; alt=&#34;1564321223669&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://Prometheussssss.github.io/about/</link>
+      <pubDate>Wed, 07 Aug 2019 23:27:44 +0800</pubDate>
+      
+      <guid>https://Prometheussssss.github.io/about/</guid>
+      <description>&lt;p&gt;4636&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Github Pages&#43;Hugo博客搭建</title>
+      <link>https://Prometheussssss.github.io/2019/build-my-blog/</link>
+      <pubDate>Wed, 07 Aug 2019 22:49:07 +0800</pubDate>
+      
+      <guid>https://Prometheussssss.github.io/2019/build-my-blog/</guid>
+      <description>&lt;p&gt;1234&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

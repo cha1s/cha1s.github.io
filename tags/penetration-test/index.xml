@@ -17,7 +17,17 @@
       <pubDate>Thu, 08 Aug 2019 15:59:30 +0800</pubDate>
       
       <guid>https://Prometheussssss.github.io/2019/sql-language/</guid>
-      <description> 学习中，敬请期待。 </description>
+      <description>SQL基础知识 0x00.SQL与NoSQL的区别  类型区别：SQL数据库主要被称为关系型数据库，而NoSQL主要被称为非关系型数据库或分布式数据库。 语言：SQL数据库基于结构化查询语言（SQL）定义和操作数据。从一方面看看这种语言是非常强大的。SQL是最通用和最广泛使用的选项之一，这使使其成为一个安全的选择，而且尤其适用于复杂的查询。但从另一方面来说，它也有局限性。SQL要求在使用之前预先确定数据的结构，并且所有数据都必须遵循相同的结构。这可能需要大量的前期准备，并且这通常意味着这意味着结构的变化更加困难而且会对对整个系统造成破坏。 NoSQL数据库具有非结构化数据的动态模式。数据以多种方式存储，这意味着它可以是面向文档，面向列，基于图形或键值存储。这种灵活性意味着可以在没有首先定义结构的情况下创建文档。每个文档也可以有自己独特的结构。语法因数据库而异，可以随时添加字段。 可伸缩性：在几乎任何情况下，SQL数据库都是可垂直扩展的。这意味着可以通过增加RAM，CPU或SSD等功能来增加单个服务器的负载。但另一方面，NoSQL数据库可以横向扩展。这意味着您可以通过分片或在NoSQL数据库中添加更多服务器来处理更多流量。它类似于在同一建筑物中添加更多楼层，而不是在附近增加更多建筑物。因此NoSQL最终可以变得更大，更强大，使这些数据库成为大型或不断变化的数据集的首选。 结构：SQL数据库是基于表的，另一方面NoSQL数据库是键值对，基于文档的，图形数据库或宽列存储。这使得关系SQL数据库成为需要多行事务的应用程序（如会计系统）或为关系结构构建的遗留系统的更好选择。 遵循的属性：SQL数据库遵循ACID属性（原子性，一致性，隔离性和持久性），而NoSQL数据库遵循Brewers CAP定理（一致性，可用性和分区容差）。  SQL数据库的一些示例包括PostgreSQL，MySQL，Oracle和Microsoft SQL Server。NoSQL数据库示例包括Redis，RavenDB Cassandra，MongoDB，BigTable，HBase，Neo4j和CouchDB。
+0x01.理论学习 MySQL支持多种数据类型，大致可分为：数值、日期/时间、字符串三类。
+数值类型 日期和时间类型 字符串类型 好的，开始实际操作
+用户登录mysql -u 用户名 -p 密码 (-h 远程登录ip）
+show databases; #显示数据库信息  MySQL v5.7.26初始有这四个库，其中1^：
+information_schema是一个信息数据库，它保存着关于MySQL服务器所维护的所有其他数据库的信息。(如数据库名，数据库的表，表栏的数据类型与访问权限等。
+mysql是mysql的核心数据库，类似于sql server中的master表，主要负责存储数据库的用户、权限设置、关键字等mysql自己需要使用的控制和管理信息。
+performance_schema主要用于收集数据库服务器性能参数。并且库里表的存储引擎均为PERFORMANCE_SCHEMA，而用户是不能创建存储引擎为PERFORMANCE_SCHEMA的表。MySQL5.7默认是开启的。
+sys2^库所有的数据源来自：performance_schema。目标是把performance_schema的把复杂度降低，让DBA能更好的阅读这个库里的内容。让DBA更快的了解DB的运行情况。
+0x02.实际操作 常用语句有：
+use test; #选取数据库test create table student(...,...,...); #建student表 show tables; #查看所有数据表 desc student; #查看student表的字段信息 insert into student values(...,...,...); #向student表中插入数据 show create table student; #查看student表的所有信息，包括一些字段类型，字段的约束，外键，主键，索引，字符编码等等。 drop table student; #删除student表 select * from student where id=12345; #查询id为12345同学信息 select id from student where name like &#39;L%&#39;; #查询名字以L开头同学的学号 select * from score where id=(select id from student where name=&#39;Lily&#39;); #查询Lily的成绩 alter table student change name stu_name varchar(20); #修改字段名 alter table student add grade smallint; #向student表中增加grade列 update student set id=11111 where stu_name=&#39;Tom&#39;; #修改内容 delete from student where id=12347; #删除student中学号为12345同学信息 drop table score; #删除score表 drop database test; #删除test库  实际操作:建立学生表，主键为学号，存有学号、姓名、性别。建立成绩表，主键为学号，存有语文、数学、英语。成绩表学号为学生表外键。</description>
     </item>
     
     <item>

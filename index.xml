@@ -16,7 +16,124 @@
       <guid>https://Prometheussssss.github.io/2019/sql-language/</guid>
       <description>
 
-&lt;h1 id=&#34;学习中-敬请期待&#34;&gt;学习中，敬请期待。&lt;/h1&gt;
+&lt;h1 id=&#34;sql基础知识&#34;&gt;SQL基础知识&lt;/h1&gt;
+
+&lt;h2 id=&#34;0x00-sql与nosql的区别&#34;&gt;0x00.SQL与NoSQL的区别&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;类型区别：SQL数据库主要被称为关系型数据库，而NoSQL主要被称为非关系型数据库或分布式数据库。&lt;/li&gt;
+&lt;li&gt;语言：SQL数据库基于结构化查询语言（SQL）定义和操作数据。从一方面看看这种语言是非常强大的。SQL是最通用和最广泛使用的选项之一，这使使其成为一个安全的选择，而且尤其适用于复杂的查询。但从另一方面来说，它也有局限性。SQL要求在使用之前预先确定数据的结构，并且所有数据都必须遵循相同的结构。这可能需要大量的前期准备，并且这通常意味着这意味着结构的变化更加困难而且会对对整个系统造成破坏。
+   NoSQL数据库具有非结构化数据的动态模式。数据以多种方式存储，这意味着它可以是面向文档，面向列，基于图形或键值存储。这种灵活性意味着可以在没有首先定义结构的情况下创建文档。每个文档也可以有自己独特的结构。语法因数据库而异，可以随时添加字段。&lt;/li&gt;
+&lt;li&gt;可伸缩性：在几乎任何情况下，SQL数据库都是可垂直扩展的。这意味着可以通过增加RAM，CPU或SSD等功能来增加单个服务器的负载。但另一方面，NoSQL数据库可以横向扩展。这意味着您可以通过分片或在NoSQL数据库中添加更多服务器来处理更多流量。它类似于在同一建筑物中添加更多楼层，而不是在附近增加更多建筑物。因此NoSQL最终可以变得更大，更强大，使这些数据库成为大型或不断变化的数据集的首选。&lt;/li&gt;
+&lt;li&gt;结构：SQL数据库是基于表的，另一方面NoSQL数据库是键值对，基于文档的，图形数据库或宽列存储。这使得关系SQL数据库成为需要多行事务的应用程序（如会计系统）或为关系结构构建的遗留系统的更好选择。&lt;/li&gt;
+&lt;li&gt;遵循的属性：SQL数据库遵循ACID属性（原子性，一致性，隔离性和持久性），而NoSQL数据库遵循Brewers CAP定理（一致性，可用性和分区容差）。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;SQL数据库的一些示例包括PostgreSQL，MySQL，Oracle和Microsoft SQL Server。NoSQL数据库示例包括Redis，RavenDB Cassandra，MongoDB，BigTable，HBase，Neo4j和CouchDB。&lt;/p&gt;
+
+&lt;h2 id=&#34;0x01-理论学习&#34;&gt;0x01.理论学习&lt;/h2&gt;
+
+&lt;p&gt;MySQL支持多种数据类型，大致可分为：数值、日期/时间、字符串三类。&lt;/p&gt;
+
+&lt;h3 id=&#34;数值类型&#34;&gt;数值类型&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565359151713.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;日期和时间类型&#34;&gt;日期和时间类型&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565359246197.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;字符串类型&#34;&gt;字符串类型&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565359279854.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;好的，开始实际操作&lt;/p&gt;
+
+&lt;p&gt;用户登录mysql -u 用户名 -p 密码 (-h 远程登录ip）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;show databases; #显示数据库信息
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565424361280.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;MySQL v5.7.26初始有这四个库，其中&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;^：&lt;/p&gt;
+
+&lt;p&gt;information_schema是一个信息数据库，它保存着关于MySQL服务器所维护的所有其他数据库的信息。(如数据库名，数据库的表，表栏的数据类型与访问权限等。&lt;/p&gt;
+
+&lt;p&gt;mysql是mysql的核心数据库，类似于sql server中的master表，主要负责存储数据库的用户、权限设置、关键字等mysql自己需要使用的控制和管理信息。&lt;/p&gt;
+
+&lt;p&gt;performance_schema主要用于收集数据库服务器性能参数。并且库里表的存储引擎均为PERFORMANCE_SCHEMA，而用户是不能创建存储引擎为PERFORMANCE_SCHEMA的表。MySQL5.7默认是开启的。&lt;/p&gt;
+
+&lt;p&gt;sys&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;^库所有的数据源来自：performance_schema。目标是把performance_schema的把复杂度降低，让DBA能更好的阅读这个库里的内容。让DBA更快的了解DB的运行情况。&lt;/p&gt;
+
+&lt;h2 id=&#34;0x02-实际操作&#34;&gt;0x02.实际操作&lt;/h2&gt;
+
+&lt;p&gt;常用语句有：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;use test; #选取数据库test
+create table student(...,...,...);  #建student表
+show tables; #查看所有数据表
+desc student; #查看student表的字段信息
+insert into student values(...,...,...); #向student表中插入数据
+show create table student; #查看student表的所有信息，包括一些字段类型，字段的约束，外键，主键，索引，字符编码等等。
+drop table student; #删除student表
+select * from student where id=12345;   #查询id为12345同学信息
+select id from student where name like &#39;L%&#39;; #查询名字以L开头同学的学号
+select * from score where id=(select id from student where name=&#39;Lily&#39;);
+                                         #查询Lily的成绩
+alter table student change name stu_name varchar(20); #修改字段名
+alter table student add grade smallint;   #向student表中增加grade列
+update student set id=11111 where stu_name=&#39;Tom&#39;; #修改内容
+delete from student where id=12347; #删除student中学号为12345同学信息
+drop table score; #删除score表
+drop database test; #删除test库
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;实际操作:建立学生表，主键为学号，存有学号、姓名、性别。建立成绩表，主键为学号，存有语文、数学、英语。成绩表学号为学生表外键。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565449775756.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565495436385.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565495970588.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;但是在后续的操作中发现即使添加了check约束也没有起到应有的作用。经过搜索在MYSQL中，CHECK只是一段可调用但无意义的子句。MySQL会直接忽略。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;^因此，在想限制的字段不多时，可以采用enum()。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565510814624.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565511034820.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;外来键是一个(或数个)指向另外一个表格主键的栏位。目的是确定资料的参考完整性(referential integrity)。换言之，只有被准许的资料值才会被存入资料库内。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565511636270.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565512394035.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;UNION 操作符用于连接两个以上的 SELECT 语句的结果组合到一个结果集合中。多个 SELECT 语句会删除重复的数据。UNION ALL 用于将不同表中相同列中查询的数据展示出来。（包括重复数据）使用union操作符要保证查询结果的列数一致。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565514177770.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;0x03-参考资料&#34;&gt;0x03.参考资料&lt;/h2&gt;
+
+&lt;p&gt;[1]&lt;a href=&#34;https://www.geeksforgeeks.org/difference-between-sql-and-nosql/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://www.geeksforgeeks.org/difference-between-sql-and-nosql/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[2]&lt;a href=&#34;http://www.runoob.com/mysql/mysql-data-types.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;http://www.runoob.com/mysql/mysql-data-types.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[3]&lt;a href=&#34;https://blog.csdn.net/cainiao000001/article/details/80502549&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://blog.csdn.net/cainiao000001/article/details/80502549&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[4]&lt;a href=&#34;https://blog.csdn.net/yanzongshuai/article/details/73441158&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://blog.csdn.net/yanzongshuai/article/details/73441158&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[5]&lt;a href=&#34;https://blog.csdn.net/qq_39521554/article/details/78681681&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://blog.csdn.net/qq_39521554/article/details/78681681&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:3&#34;&gt;3 &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;4 &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:4&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:5&#34;&gt;5 &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:5&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
 </description>
     </item>
     

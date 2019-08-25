@@ -5,8 +5,185 @@
     <description>Recent content in Prometheus&#39;s Blog on Prometheus&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Aug 2019 15:59:30 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 25 Aug 2019 10:34:27 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>MySQL System Tables &amp; Hashcat</title>
+      <link>https://Prometheussssss.github.io/2019/mysql-system-tables/</link>
+      <pubDate>Sun, 25 Aug 2019 10:34:27 +0800</pubDate>
+      
+      <guid>https://Prometheussssss.github.io/2019/mysql-system-tables/</guid>
+      <description>
+
+&lt;h1 id=&#34;数据库系统表相关学习&#34;&gt;数据库系统表相关学习&lt;/h1&gt;
+
+&lt;h3 id=&#34;利用数据库的功能读写文件&#34;&gt;利用数据库的功能读写文件&lt;/h3&gt;
+
+&lt;p&gt;首先介绍一下在MySQL 5.7.6引入的新特性&amp;ndash;secure_file_priv参数&lt;/p&gt;
+
+&lt;p&gt;这个参数用来限制数据导入和导出操作的效果，例如执行LOAD DATA、SELECT … INTO OUTFILE语句和LOAD_FILE()函数。这些操作需要用户具有FILE权限。
+如果这个参数为空，这个变量没有效果；
+如果这个参数设为一个目录名，MySQL服务只允许在这个目录中执行文件的导入和导出操作。这个目录必须存在，MySQL服务不会创建它；
+如果这个参数为NULL，MySQL服务会禁止导入和导出操作。&lt;/p&gt;
+
+&lt;p&gt;我们可以使用&lt;code&gt;show variables like &amp;quot;%secure%&amp;quot;&lt;/code&gt;查一下当前字段设置&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566437000370.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;打开我们的配置文件，加上&lt;code&gt;secure_file_priv=&amp;quot;/&amp;quot;&lt;/code&gt;意为允许将数据导出到任意目录&lt;/p&gt;
+
+&lt;p&gt;再次查看，修改成功&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566437189152.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;进行一下测试&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566437366824.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566437406483.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;可以看到文件是用户mysql创建的&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566437472650.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果mysql用户权限不足就会报错&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566438709389.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;总结：想要进行文件读写需满足以下条件&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;目标目录要有可写权限&lt;/li&gt;
+&lt;li&gt;当前数据库用户要有FILE权限&lt;/li&gt;
+&lt;li&gt;目标文件不能已存在&lt;/li&gt;
+&lt;li&gt;secure_file_priv的值为空(如果值为某一文件夹，那么仅该目录可操作)&lt;/li&gt;
+&lt;li&gt;路径完整&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;mysql中的系统表&#34;&gt;mysql中的系统表&lt;/h3&gt;
+
+&lt;p&gt;在mysql v5.7.26中主要有这四个系统库&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566525297139.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;重点关注&lt;code&gt;information_schema&lt;/code&gt;和&lt;code&gt;mysql&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;information-schema数据库部分表说明&#34;&gt;information_schema数据库部分表说明&lt;/h4&gt;
+
+&lt;p&gt;•SCHEMATA表：提供了当前mysql实例中所有数据库的信息。是show databases的结果取之此表。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566567101870.png&#34; alt=&#34;&#34; /&gt;
+•TABLES表：提供了关于数据库中的表的信息（包括视图）。详细表述了某个表属于哪个schema，表类型，表引擎，创建时间等信息。是show tables from schemaname的结果取之此表。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566568522806.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;•COLUMNS表：提供了表中的列信息。详细表述了某张表的所有列以及每个列的信息。是show columns from schemaname.tablename的结果取之此表。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566568766875.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;•STATISTICS表：提供了关于表索引的信息。是show index from schemaname.tablename的结果取之此表。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566568839648.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;•USER_PRIVILEGES（用户权限）表：给出了关于全程权限的信息。该信息源自mysql.user授权表。是非标准表。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566568456816.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;•SCHEMA_PRIVILEGES（方案权限）表：给出了关于方案（数据库）权限的信息。该信息来自mysql.db授权表。是非标准表。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566569364688.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;•TABLE_PRIVILEGES（表权限）表：给出了关于表权限的信息。该信息源自mysql.tables_priv授权表。是非标准表。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566569398959.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;•COLUMN_PRIVILEGES（列权限）表：给出了关于列权限的信息。该信息源自mysql.columns_priv授权表。是非标准表。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566569433918.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;•CHARACTER_SETS（字符集）表：提供了mysql实例可用字符集的信息。是SHOW CHARACTER SET结果集取之此表。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566569491095.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;•COLLATIONS表：提供了关于各字符集的对照信息。
+•COLLATION_CHARACTER_SET_APPLICABILITY表：指明了可用于校对的字符集。这些列等效于SHOW COLLATION的前两个显示字段。
+•TABLE_CONSTRAINTS表：描述了存在约束的表。以及表的约束类型。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566614460546.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;•KEY_COLUMN_USAGE表：描述了具有约束的键列。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566614515627.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;•ROUTINES表：提供了关于存储子程序（存储程序和函数）的信息。此时，ROUTINES表不包含自定义函数（UDF）。名为“mysql.proc name”的列指明了对应于INFORMATION_SCHEMA.ROUTINES表的mysql.proc表列。&lt;/p&gt;
+
+&lt;p&gt;•VIEWS表：给出了关于数据库中的视图的信息。需要有show views权限，否则无法查看视图信息。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566568608499.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;•TRIGGERS表：提供了关于触发程序的信息。必须有super权限才能查看该表
+&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566568661655.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;mysql数据库部分表说明&#34;&gt;mysql数据库部分表说明&lt;/h4&gt;
+
+&lt;p&gt;在mysql数据库中，有mysql_install_db脚本初始化权限表，存储权限的表有：&lt;/p&gt;
+
+&lt;p&gt;1、user表: 用户列、权限列、安全列、资源控制列&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566699286976.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2、db表 : 用户列、权限列&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566699330793.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;prtformance-schema见-4&#34;&gt;PRTFORMANCE_SCHEMA见[4]&lt;/h4&gt;
+
+&lt;h3 id=&#34;利用hashcat进行密码破解&#34;&gt;利用hashcat进行密码破解&lt;/h3&gt;
+
+&lt;p&gt;在数据库中使用&lt;code&gt;select user,authentication_string from mysql.user;&lt;/code&gt;查看加密后用户密码。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566520635080.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;hashcat语句为&lt;code&gt;.\hashcat64.exe -a 0 -m 300 --force A4B6157319038724E3560894F7F932C8886EBFCF ./example.dict -o C:\Users\Administrator\Desktop\1.txt&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-a 0     #指定破解类型，0为字典破解,3为暴力破解
+-m 300   #指定hash类型，300是MySQL4.1/MySQL5
+-o dir   #指定输出文件位置
+./example.dict 为字典
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在使用物理机上的hashcat时报错，网上查原因是笔记本电脑不支持此函数&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566521508322.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;但是破解还是成功了&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566522770070.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566522785684.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;尝试使用暴力破解&lt;/p&gt;
+
+&lt;p&gt;可用掩码有&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566527066230.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;语句为&lt;code&gt;.\hashcat64.exe -a 3 -m 300 --keep-guessing 764ADB88446D4A100F3B4B0E3F68A628D8306915 --increment --increment-min 1 --increment-max 8 ?l?l?l?l?l?l?l?l -o C:\Users\Administrator\Desktop\1.txt&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/MySQL-System-Tables/1566527559869.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;参考资料&#34;&gt;参考资料&lt;/h3&gt;
+
+&lt;p&gt;[1] &lt;a href=&#34;https://blog.csdn.net/HHTNAN/article/details/78520511&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://blog.csdn.net/HHTNAN/article/details/78520511&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[2] &lt;a href=&#34;https://blog.csdn.net/caiqiiqi/article/details/84673007&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://blog.csdn.net/caiqiiqi/article/details/84673007&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[3] &lt;a href=&#34;https://blog.csdn.net/xlxxcc/article/details/51754524&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://blog.csdn.net/xlxxcc/article/details/51754524&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[4] &lt;a href=&#34;https://www.cnblogs.com/zhoujinyi/p/5236705.html&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;PERFORMANCE_SCHEMA 说明&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>SQL Language</title>
@@ -18,7 +195,7 @@
 
 &lt;h1 id=&#34;sql基础知识&#34;&gt;SQL基础知识&lt;/h1&gt;
 
-&lt;h2 id=&#34;0x00-sql与nosql的区别&#34;&gt;0x00.SQL与NoSQL的区别&lt;/h2&gt;
+&lt;h2 id=&#34;sql与nosql的区别&#34;&gt;SQL与NoSQL的区别&lt;/h2&gt;
 
 &lt;ol&gt;
 &lt;li&gt;类型区别：SQL数据库主要被称为关系型数据库，而NoSQL主要被称为非关系型数据库或分布式数据库。&lt;/li&gt;
@@ -31,7 +208,7 @@
 
 &lt;p&gt;SQL数据库的一些示例包括PostgreSQL，MySQL，Oracle和Microsoft SQL Server。NoSQL数据库示例包括Redis，RavenDB Cassandra，MongoDB，BigTable，HBase，Neo4j和CouchDB。&lt;/p&gt;
 
-&lt;h2 id=&#34;0x01-理论学习&#34;&gt;0x01.理论学习&lt;/h2&gt;
+&lt;h2 id=&#34;理论学习&#34;&gt;理论学习&lt;/h2&gt;
 
 &lt;p&gt;MySQL支持多种数据类型，大致可分为：数值、日期/时间、字符串三类。&lt;/p&gt;
 
@@ -56,7 +233,7 @@
 
 &lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565424361280.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;MySQL v5.7.26初始有这四个库，其中&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;^：&lt;/p&gt;
+&lt;p&gt;MySQL v5.7.26初始有这四个库，其中：&lt;/p&gt;
 
 &lt;p&gt;information_schema是一个信息数据库，它保存着关于MySQL服务器所维护的所有其他数据库的信息。(如数据库名，数据库的表，表栏的数据类型与访问权限等。&lt;/p&gt;
 
@@ -64,9 +241,9 @@
 
 &lt;p&gt;performance_schema主要用于收集数据库服务器性能参数。并且库里表的存储引擎均为PERFORMANCE_SCHEMA，而用户是不能创建存储引擎为PERFORMANCE_SCHEMA的表。MySQL5.7默认是开启的。&lt;/p&gt;
 
-&lt;p&gt;sys&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;^库所有的数据源来自：performance_schema。目标是把performance_schema的把复杂度降低，让DBA能更好的阅读这个库里的内容。让DBA更快的了解DB的运行情况。&lt;/p&gt;
+&lt;p&gt;sys库所有的数据源来自：performance_schema。目标是把performance_schema的把复杂度降低，让DBA能更好的阅读这个库里的内容。让DBA更快的了解DB的运行情况。&lt;/p&gt;
 
-&lt;h2 id=&#34;0x02-实际操作&#34;&gt;0x02.实际操作&lt;/h2&gt;
+&lt;h2 id=&#34;实际操作&#34;&gt;实际操作&lt;/h2&gt;
 
 &lt;p&gt;常用语句有：&lt;/p&gt;
 
@@ -97,7 +274,7 @@ drop database test; #删除test库
 
 &lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565495970588.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;但是在后续的操作中发现即使添加了check约束也没有起到应有的作用。经过搜索在MYSQL中，CHECK只是一段可调用但无意义的子句。MySQL会直接忽略。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;^因此，在想限制的字段不多时，可以采用enum()。&lt;/p&gt;
+&lt;p&gt;但是在后续的操作中发现即使添加了check约束也没有起到应有的作用。经过搜索在MYSQL中，CHECK只是一段可调用但无意义的子句。MySQL会直接忽略。因此，在想限制的字段不多时，可以采用enum()。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565510814624.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
@@ -113,7 +290,7 @@ drop database test; #删除test库
 
 &lt;p&gt;&lt;img src=&#34;https://Prometheussssss.github.io/images/Basic-knowledge/SQL-language/1565514177770.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;0x03-参考资料&#34;&gt;0x03.参考资料&lt;/h2&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料&lt;/h2&gt;
 
 &lt;p&gt;[1]&lt;a href=&#34;https://www.geeksforgeeks.org/difference-between-sql-and-nosql/&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://www.geeksforgeeks.org/difference-between-sql-and-nosql/&lt;/a&gt;&lt;/p&gt;
 
@@ -124,16 +301,6 @@ drop database test; #删除test库
 &lt;p&gt;[4]&lt;a href=&#34;https://blog.csdn.net/yanzongshuai/article/details/73441158&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://blog.csdn.net/yanzongshuai/article/details/73441158&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;[5]&lt;a href=&#34;https://blog.csdn.net/qq_39521554/article/details/78681681&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://blog.csdn.net/qq_39521554/article/details/78681681&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:3&#34;&gt;3 &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:3&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:4&#34;&gt;4 &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:4&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:5&#34;&gt;5 &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:5&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
 </description>
     </item>
     
@@ -574,7 +741,7 @@ hugo new site Prometheussssss.github.io
 &lt;li&gt;网站结构&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;我们的Mysites目录下将会出现一个名为Prometheussssss.github.io的新文件夹，目录如下,其中archetypes包括内容类型，在创建新内容时自动生成内容的配置。config.toml是网站的配置属性文件。content文件夹里放你网站的内容，例如你发布的博客文章。data目录是Hugo使用的配置文件存放的地方。layout目录存放布局内容，决定内容如何呈现。static目录存放静态资源如图片、css等。themes用于存放网站主题。&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;^&lt;/p&gt;
+&lt;p&gt;我们的Mysites目录下将会出现一个名为Prometheussssss.github.io的新文件夹，目录如下,其中archetypes包括内容类型，在创建新内容时自动生成内容的配置。config.toml是网站的配置属性文件。content文件夹里放你网站的内容，例如你发布的博客文章。data目录是Hugo使用的配置文件存放的地方。layout目录存放布局内容，决定内容如何呈现。static目录存放静态资源如图片、css等。themes用于存放网站主题。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;|-- archetypes
 |-- config.toml
@@ -684,14 +851,6 @@ git push -u origin master
 &lt;p&gt;[4] &lt;a href=&#34;https://blog.csdn.net/qq_37577660/article/details/78565899&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;Git操作&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;[5] &lt;a href=&#34;https://blog.csdn.net/qq_30682027/article/details/83536577&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://blog.csdn.net/qq_30682027/article/details/83536577&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;1 &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
 </description>
     </item>
     
